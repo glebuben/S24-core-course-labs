@@ -1,0 +1,20 @@
+- name: Docker playbook
+  hosts: localhost
+  become: True
+  roles:
+    - docker
+# Task 1
+#    - geerlingguy.docker
+  tasks:
+    - name: Pull Docker image
+      docker_image:
+        name: glebuben/dev-ops-labs:latest
+        source: pull
+
+    - name: Run Docker container
+      docker_container:
+        name: my_container
+        image: glebuben/dev-ops-labs:latest
+        state: started
+        ports:
+          - "8000:5000"
